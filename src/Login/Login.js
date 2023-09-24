@@ -1,17 +1,35 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
+  console.log(username, password);
+
   const handleLogin = () => {
-    // You would typically perform authentication here.
-    // For simplicity, we'll consider login successful if username and password are not empty.
-    if (username !== "" && password !== "") {
-      history.push("/dashboard");
-    }
+    history.push("/dashboard");
+
+    // try {
+    //   const response = axios.post("http://localhost:4000/login", {
+    //     username: username,
+    //     password: password,
+    //   });
+
+    //   if (response.data.message === "Login successful") {
+    //     console.log("well", response.data.message);
+    //     history.push("/dashboard");
+    //     // <Redirect to="/dashboard" />
+    //   } else {
+    //     alert("Login failed");
+    //   }
+    // } catch (error) {
+    //   console.error("Error:", error);
+    //   console.log("An error occurred");
+    // }
   };
 
   return (
@@ -64,6 +82,7 @@ const Login = () => {
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
                     required=""
+                    // onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
                 <div>
@@ -80,6 +99,7 @@ const Login = () => {
                     placeholder="••••••••"
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
+                    // onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <div class="flex items-center justify-between">
@@ -111,7 +131,8 @@ const Login = () => {
                 </div>
                 <button
                   type="submit"
-                  class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  onClick={handleLogin}
+                  class="w-full text-white bg-slate-950	 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
                   Sign in
                 </button>
@@ -119,7 +140,7 @@ const Login = () => {
                   Don’t have an account yet?{" "}
                   <a
                     href="#"
-                    class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    class="font-medium text-primary-600 hover:underline dark:text--500"
                   >
                     Sign up
                   </a>
